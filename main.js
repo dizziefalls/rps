@@ -33,13 +33,15 @@ function playRound(){
     const computerSelection = getComputerChoice();
     console.log('You chose:', playerSelection, '\nThe computer chose:', computerSelection);
     const roundResult = determineWinner(playerSelection, computerSelection);
-    //TODO: Add pPoints and cPoints funcs that are called here
     if (roundResult === 0){
         console.log('It\'s a tie! No winner here yet');
+        return roundResult;
     } else if (roundResult === 1) {
         console.log('You win this one!');
+        return roundResult;
     } else if (roundResult === 2){
         console.log('No dice... You\'ll get em next time');
+        return roundResult;
     } else{
         console.log('Well I made a goober somewhere...');
     }
@@ -58,6 +60,7 @@ function simplifyChoice(playerInput){
 
 //prompts player for choice, checks for validity and returns
 function getPlayerChoice(){
+    //add condition for being past the 1st round to change message
     let playerChoice = prompt('Welcome to RPS! Please choose your attack using an integer!:\n 1. Scissors\n 2. Paper\n 3. Rock', '');
     if (playerChoice > 0 && playerChoice < 4) {
         return simplifyChoice(playerChoice);
@@ -68,7 +71,34 @@ function getPlayerChoice(){
 }
 
 function game(){
-    
+    //a match lasts 5 rounds. tab points during each loop. after the last round print the winner.
+    let roundNum = 1;
+    let playerPoints = 0;
+    let computerPoints = 0;
+
+    for (i = 0; i < 5; i++){
+        //fix the match printing issue by incorporating into getPlayerChoice()
+        console.log(`Match: ${roundNum}!`)
+        let result = playRound();
+        if (result === 1){
+            playerPoints += 1;
+        } else if (result === 2) {
+            computerPoints += 1;
+        }
+        roundNum++;
+    }
+
+    let matchResults = `${playerPoints} to ${computerPoints}!`;
+    console.log(matchResults);
+
+    if (playerPoints > computerPoints){
+        console.log('You win! I don\'t know how you did it...');
+    } else if (computerPoints > playerPoints){
+        console.log('Sorry pal. Guess it wasn\'t in the silicon cards.');
+    } else {
+        console.log('A tie?! Mein Gott! Time for a rematch.');
+    }
+
 }
 
-playRound();
+game();
