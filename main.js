@@ -19,11 +19,13 @@ function determineWinner(pSelection, cSelection){
     let result = 0
     if (pSelection === cSelection) {
         return result = 0;
-    } else if ((pSelection === 'scissors' && cSelection === 'paper') || (pSelection === 'paper' && cSelection === 'rock') || (pSelection === 'rock' && cSelection === 'scissors')){
+    } else if ((pSelection === 'scissors' && cSelection === 'paper') || 
+    (pSelection === 'paper' && cSelection === 'rock') || 
+    (pSelection === 'rock' && cSelection === 'scissors')){
        return result = 1;
     } //lazy but what can I say...
     else {
-       return result = 2;
+    return result = 2;
     }
 }
 
