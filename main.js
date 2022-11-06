@@ -30,8 +30,8 @@ function determineWinner(pSelection, cSelection){
 }
 
 //plays a single round of RPS given player and pc inputs
-function playRound(){
-    const playerSelection = getPlayerChoice();
+function playRound(pChoice){
+    const playerSelection = pChoice;
     const computerSelection = getComputerChoice();
     console.log('You chose:', playerSelection, '\nThe computer chose:', computerSelection);
     const roundResult = determineWinner(playerSelection, computerSelection);
@@ -67,8 +67,10 @@ function getPlayerChoice(){
     console.log(buttonChildren);
     buttonChildren.forEach(btn => {
         btn.addEventListener('click', () => {
-            console.log(btn.id);
-            return btn.id;
+            //return btn.id;
+            if (btn.id !== undefined){
+                playRound(btn.id);
+            };
         });
     });
     //Find where to add playRound() logic
@@ -76,7 +78,10 @@ function getPlayerChoice(){
 
 function game(){
     //a match lasts 5 rounds. tab points during each loop. after the last round print the winner.
-    let roundNum = 1;
+    
+    //only use roundNum if you want
+    //let roundNum = 1;
+
     let playerPoints = 0;
     let computerPoints = 0;
 
@@ -95,18 +100,33 @@ function game(){
         roundNum++;
     }
     */
+    //change to do...while with victory conditions
+    while (playerPoints !== 5 || computerPoints !== 5) {
+        let result = getPlayerChoice;
+        if (result === 1 ){
+            playerPoints++;
+        }
+        else if (result === 2){
+            computerPoints++;
+        }
+        else {
 
-    let matchResults = `${playerPoints} to ${computerPoints}!`;
-    console.log(matchResults);
-
-    if (playerPoints > computerPoints){
-        console.log('You win! I don\'t know how you did it...');
-    } else if (computerPoints > playerPoints){
-        console.log('Sorry pal. Guess it wasn\'t in the silicon cards.');
-    } else {
-        console.log('A tie?! Mein Gott! Time for a rematch.');
+        }
     }
 
+    if (playerPoints >= 5 || computerPoints >= 5){
+        //change to who gets five right first
+        let matchResults = `${playerPoints} to ${computerPoints}!`;
+        console.log(matchResults);
+
+        if (playerPoints > computerPoints){
+            console.log('You win! I don\'t know how you did it...');
+        } else if (computerPoints > playerPoints){
+            console.log('Sorry pal. Guess it wasn\'t in the silicon cards.');
+        } else {
+            console.log('A tie?! Mein Gott! Time for a rematch.');
+        }
+    }
 }
 
 getPlayerChoice();
