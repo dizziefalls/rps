@@ -67,14 +67,18 @@ function getPlayerChoice(){
     console.log(buttonChildren);
     buttonChildren.forEach(btn => {
         btn.addEventListener('click', () => {
-            //return btn.id;
+            return playRound(btn.id);
+            /*
             if (btn.id !== undefined){
-                playRound(btn.id);
+                console.log('EVENT LISTENER ERROR');
             };
+            */
         });
     });
     //Find where to add playRound() logic
 };
+
+
 
 function game(){
     //a match lasts 5 rounds. tab points during each loop. after the last round print the winner.
@@ -102,12 +106,16 @@ function game(){
     */
     //change to do...while with victory conditions
     while (playerPoints !== 5 || computerPoints !== 5) {
-        let result = getPlayerChoice;
+        console.log(`${playerPoints} to ${computerPoints}...`);
+        let result = getPlayerChoice();
+        //Don't think it's returneding a value rn
         if (result === 1 ){
             playerPoints++;
+            console.log(`${playerPoints} to ${computerPoints}...`);
         }
         else if (result === 2){
             computerPoints++;
+            console.log(`${playerPoints} to ${computerPoints}...`);
         }
         else {
 
