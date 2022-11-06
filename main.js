@@ -49,6 +49,7 @@ function playRound(){
     }
 }
 
+
 //changes user string into the same that getComputerChoice uses
 function simplifyChoice(playerInput){
     let simpleChoice = playerInput;
@@ -62,21 +63,25 @@ function simplifyChoice(playerInput){
 
 //prompts player for choice, checks for validity and returns
 function getPlayerChoice(){
-    //add condition for being past the 1st round to change message
-    let playerChoice = prompt('Welcome to RPS! Please choose your attack using an integer!:\n 1. Scissors\n 2. Paper\n 3. Rock', '');
-    if (playerChoice > 0 && playerChoice < 4) {
-        return simplifyChoice(playerChoice);
-    }
-    else {
-        console.log('Invalid choice. Use 1, 2, or 3')
-    }
-}
+    let buttonChildren = Array.from(document.querySelectorAll('div button'));
+    console.log(buttonChildren);
+    buttonChildren.forEach(btn => {
+        btn.addEventListener('click', () => {
+            console.log(btn.id);
+            return btn.id;
+        });
+    });
+    //Find where to add playRound() logic
+};
 
 function game(){
     //a match lasts 5 rounds. tab points during each loop. after the last round print the winner.
     let roundNum = 1;
     let playerPoints = 0;
     let computerPoints = 0;
+
+    /* static num of rounds logic and scoring system
+       TODO: extract scoring system to separate function
 
     for (i = 0; i < 5; i++){
         //fix the match printing issue by incorporating into getPlayerChoice()
@@ -89,6 +94,7 @@ function game(){
         }
         roundNum++;
     }
+    */
 
     let matchResults = `${playerPoints} to ${computerPoints}!`;
     console.log(matchResults);
@@ -103,4 +109,4 @@ function game(){
 
 }
 
-game();
+getPlayerChoice();
