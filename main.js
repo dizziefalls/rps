@@ -67,7 +67,8 @@ function getPlayerChoice(){
     console.log(buttonChildren);
     buttonChildren.forEach(btn => {
         btn.addEventListener('click', () => {
-            return playRound(btn.id);
+            updateScore(btn.id);
+            checkWinCond();
             /*
             if (btn.id !== undefined){
                 console.log('EVENT LISTENER ERROR');
@@ -78,63 +79,36 @@ function getPlayerChoice(){
     //Find where to add playRound() logic
 };
 
-
-
-function game(){
-    //a match lasts 5 rounds. tab points during each loop. after the last round print the winner.
-    
-    //only use roundNum if you want
-    //let roundNum = 1;
-
-    let playerPoints = 0;
-    let computerPoints = 0;
-
-    /* static num of rounds logic and scoring system
-       TODO: extract scoring system to separate function
-
-    for (i = 0; i < 5; i++){
-        //fix the match printing issue by incorporating into getPlayerChoice()
-        console.log(`Match: ${roundNum}!`)
-        let result = playRound();
-        if (result === 1){
-            playerPoints += 1;
-        } else if (result === 2) {
-            computerPoints += 1;
-        }
-        roundNum++;
-    }
-    */
+function updateScore(pChoice){
+    console.log(`${playerPoints} to ${computerPoints}...`);
     //change to do...while with victory conditions
-    while (playerPoints !== 5 || computerPoints !== 5) {
-        console.log(`${playerPoints} to ${computerPoints}...`);
-        let result = getPlayerChoice();
-        //Don't think it's returneding a value rn
-        if (result === 1 ){
-            playerPoints++;
-            console.log(`${playerPoints} to ${computerPoints}...`);
-        }
-        else if (result === 2){
-            computerPoints++;
-            console.log(`${playerPoints} to ${computerPoints}...`);
-        }
-        else {
-
-        }
+    if (playRound(pChoice) === 1) {
+        playerPoints++;
     }
+    else if (playRound(pChoice) === 2){
+        computerPoints++;
+    }
+}
 
+
+ 
+
+function checkWinCond(){
     if (playerPoints >= 5 || computerPoints >= 5){
-        //change to who gets five right first
         let matchResults = `${playerPoints} to ${computerPoints}!`;
         console.log(matchResults);
-
+    
         if (playerPoints > computerPoints){
             console.log('You win! I don\'t know how you did it...');
+            play = false;
         } else if (computerPoints > playerPoints){
             console.log('Sorry pal. Guess it wasn\'t in the silicon cards.');
+            play = false;
         } else {
             console.log('A tie?! Mein Gott! Time for a rematch.');
         }
     }
 }
-
+let playerPoints = 0;
+let computerPoints = 0;  
 getPlayerChoice();
